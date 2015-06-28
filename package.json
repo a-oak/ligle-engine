@@ -1,0 +1,24 @@
+{
+  "name": "ligle-engine",
+  "version": "0.1.0",
+  "description": "ligle engine all in one",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://git.hijack.moe/crackhopper/ligle-engine.git"
+  },
+  "keywords": [
+    "ligle",
+    "engine"
+  ],
+  "author": "crackhopper",
+  "license": "copyright of ligle",
+  "dependencies": {
+    "ligle-util": "git+https://git.hijack.moe/crackhopper/ligle-util.git#0.1.1",
+    "ligle-base": "git+https://git.hijack.moe/crackhopper/ligle-base.git#0.1.1",
+    "ligle-service": "git+https://git.hijack.moe/crackhopper/ligle-service.git#0.1.1"
+  }
+}
