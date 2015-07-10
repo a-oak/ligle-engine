@@ -26,7 +26,10 @@ module.exports = function(config){
   exportObj={};
   exportObj.util = require('ligle-util');
   exportObj.base = require('ligle-base')(cfg);
-  exportObj.service = require('ligle-service');
+  exportObj.start = exportObj.base.start.bind(exportObj.base);
+
+// we now purge out service, and in future would add this module.
+//  exportObj.service = require('ligle-service');
 
   logger.trace('configuration:',cfg);
   return exportObj;

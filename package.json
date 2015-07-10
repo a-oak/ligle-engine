@@ -17,8 +17,7 @@
   "author": "crackhopper",
   "license": "copyright of ligle",
   "dependencies": {
-    "ligle-util": "0.1.2",
-    "ligle-base": "0.1.2",
-    "ligle-service": "0.1.2"
+    "ligle-util": "0.2.0",
+    "ligle-base": "0.2.0"
   }
 }
