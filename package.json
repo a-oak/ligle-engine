@@ -18,6 +18,6 @@
   "license": "copyright of ligle",
   "dependencies": {
     "ligle-util": "0.2.0",
-    "ligle-base": "0.2.3"
+    "ligle-base": "0.2.4"
   }
 }
