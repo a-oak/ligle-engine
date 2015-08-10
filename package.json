@@ -18,7 +18,7 @@
   "license": "copyright of ligle",
   "dependencies": {
     "async": "^1.2.1",
-    "ligle-util": "^0.2.0",
-    "ligle-base": "^0.2.4"
+    "ligle-util": "^0.2.3",
+    "ligle-base": "^0.2.6"
   }
 }

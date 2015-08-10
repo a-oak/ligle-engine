@@ -39,9 +39,10 @@ module.exports = function(config){
 
   var self = exportObj;
   function exitHandler(err) {
+    if(err) logger.error(err.stack);
     self.runHooks(self.exitHooks,function(err,result){
       logger.info('exit hooks finished');
-      if(err) console.log(err.stack);
+      if(err) logger.error(err.stack);
       self.base.db.close(function(){
         process.nextTick(function(){
           logger.info('db closed');
