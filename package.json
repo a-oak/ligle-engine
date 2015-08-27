@@ -1,6 +1,6 @@
 {
   "name": "ligle-engine",
-  "version": "0.2.7",
+  "version": "0.3.0",
   "description": "ligle engine all in one",
   "main": "index.js",
   "scripts": {
@@ -18,7 +18,9 @@
   "license": "copyright of ligle",
   "dependencies": {
     "async": "^1.2.1",
-    "ligle-util": "^0.2.3",
-    "ligle-base": "^0.2.6"
+    "ligle-util": "~0.3.0",
+    "ligle-db": "~0.3.0",
+    "ligle-model": "~0.3.0",
+    "ligle-midware": "~0.3.0"
   }
 }

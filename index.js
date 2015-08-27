@@ -1,32 +1,53 @@
 
 var ligle={};
 ligle.util = require('ligle-util');
-var logger = ligle.util.logger('ligle-engine','TRACE');
 var configure = ligle.util.configure;
 var async = require('async');
 
 var defaultCfg = {
-  'ligle-model':{
+  model:{
     upDir:'./',
     staticDir:'/'
   },
-  'ligle-db': { 
-    db: 'ligleEngine', 
-    host: '127.0.0.1', 
-    port: 27017
+  db: { 
+    name:'ligle-engine',
+    host: '127.0.0.1',
+    port:27017
   },
-  'ligle-routes': {
-  }
+  midware:{
+  },
+  loggerName:'ligle-engine', // only for this module
+  loggerLevel:'TRACE' // this level is used for all submodules
 };
 
 var exportObj;
 module.exports = function(config){
   if(exportObj) return exportObj;
-  var cfg = configure(config,'',defaultCfg);
+
+  var cfg = configure(config,defaultCfg);
+  var logger = ligle.util.logger(cfg.loggerName,cfg.loggerLevel);
+  module.exports.logger = logger;
+  module.exports.cfg = cfg;
+  logger.trace(cfg);
 
   exportObj={};
+  // ligle-util
   exportObj.util = require('ligle-util');
-  exportObj.base = require('ligle-base')(cfg);
+  var logLevel = {loggerLevel:cfg.loggerLevel};
+
+  // ligle-db
+  var dbCfg = configure(logLevel,cfg.db);
+  exportObj.db= require('ligle-db')(dbCfg);
+
+  // ligle-model
+  var modelCfg = configure(logLevel,cfg.model);
+  modelCfg.db = exportObj.db;// model模块必须有db实例
+  exportObj.model= require('ligle-model')(modelCfg);
+
+  // ligle-midware
+  var midwareCfg = configure(logLevel,cfg.midware);
+  exportObj.midware= require('ligle-midware')(midwareCfg);
+
   // hooks of engine
   exportObj.initHooks = [];
   exportObj.dbOpenedHooks = [];
@@ -43,11 +64,9 @@ module.exports = function(config){
     self.runHooks(self.exitHooks,function(err,result){
       logger.info('exit hooks finished');
       if(err) logger.error(err.stack);
-      self.base.db.close(function(){
-        process.nextTick(function(){
-          logger.info('db closed');
-          process.exit(0);
-        });
+      process.nextTick(function(){
+        logger.info('db closed');
+        process.exit(0);
       });
     });
   };
@@ -58,7 +77,7 @@ module.exports = function(config){
     process.on('uncaughtException', exitHandler);
   };
   var _start = function(runApp){
-    self.base.start(function(){// opendb
+    self.db.start(function(){// opendb
       self.runHooks(self.dbOpenedHooks,function(err,result){
         logger.info('dbOpened hooks finished');
 
@@ -81,7 +100,6 @@ module.exports = function(config){
     //  exportObj.service = require('ligle-service');
   };
 
-  logger.trace('configuration:',cfg);
   return exportObj;
 };
 
