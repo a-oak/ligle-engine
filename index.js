@@ -31,6 +31,7 @@ module.exports = function(config){
   logger.trace(cfg);
 
   exportObj={};
+  exportObj.cfg = cfg;
   // ligle-util
   exportObj.util = require('ligle-util');
   var logLevel = {loggerLevel:cfg.loggerLevel};
