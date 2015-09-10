@@ -1,51 +1,48 @@
 
 var ligle={};
 ligle.util = require('ligle-util');
+var allConfigure = ligle.util.allConfigure;
 var configure = ligle.util.configure;
-var async = require('async');
 
-var defaultCfg = {
-  model:{
-    upDir:'./',
-    staticDir:'/'
-  },
-  db: { 
-    name:'ligle-engine',
-    host: '127.0.0.1',
-    port:27017
-  },
-  midware:{
-  },
-  loggerName:'ligle-engine', // only for this module
-  loggerLevel:'TRACE' // this level is used for all submodules
-};
+var async = require('async');
 
 var exportObj;
 module.exports = function(config){
   if(exportObj) return exportObj;
 
-  var cfg = configure(config,defaultCfg);
-  var logger = ligle.util.logger(cfg.loggerName,cfg.loggerLevel);
-  module.exports.logger = logger;
+  var logLevel;
+  var defaultCfg = require('./config.js');
+  var cfg = allConfigure(config,defaultCfg);
   module.exports.cfg = cfg;
-  logger.trace(cfg);
 
   exportObj={};
   exportObj.cfg = cfg;
+
   // ligle-util
-  exportObj.util = require('ligle-util');
-  var logLevel = {loggerLevel:cfg.loggerLevel};
+  logLevel = {loggerLevel:cfg.loggerLevel};
+  var utilCfg = configure(logLevel,cfg.util);
+  exportObj.util = require('ligle-util')(utilCfg);
+  
+  
+  ligle.util = exportObj.util;
+  var logger = ligle.util.logger(cfg.loggerName,cfg.loggerLevel);
+
+  module.exports.logger = logger;
+  logger.trace(cfg);
 
   // ligle-db
+  logLevel = {loggerLevel:cfg.loggerLevel};
   var dbCfg = configure(logLevel,cfg.db);
   exportObj.db= require('ligle-db')(dbCfg);
 
   // ligle-model
+  logLevel = {loggerLevel:cfg.loggerLevel};
   var modelCfg = configure(logLevel,cfg.model);
   modelCfg.db = exportObj.db;// model模块必须有db实例
   exportObj.model= require('ligle-model')(modelCfg);
 
   // ligle-midware
+  logLevel = {loggerLevel:cfg.loggerLevel};
   var midwareCfg = configure(logLevel,cfg.midware);
   exportObj.midware= require('ligle-midware')(midwareCfg);
 
