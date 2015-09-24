@@ -1,6 +1,6 @@
 {
   "name": "ligle-engine",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "ligle engine all in one",
   "main": "index.js",
   "scripts": {
