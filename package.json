@@ -19,10 +19,10 @@
   "peerDependencies": {
     "ligle-util": "~0.3.2",
     "ligle-db": "~0.3.2",
-    "ligle-model": "~0.3.2"
+    "ligle-model": "~0.3.2",
     "ligle-midware": "~0.3.3"
   },
   "dependencies": {
-    "async": "^1.2.1",
+    "async": "^1.2.1"
   }
 }
