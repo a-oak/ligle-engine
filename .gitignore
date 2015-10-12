@@ -236,3 +236,6 @@ public/images/upload/*/*.bmp
 
 *.log
 *.log.*
+
+changelog.txt
+test/coverage
