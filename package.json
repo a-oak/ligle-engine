@@ -6,9 +6,10 @@
   "scripts": {
     "test": "grunt test"
   },
+  "homepage": "https://github.com/a-oak/ligle-engine",
   "repository": {
     "type": "git",
-    "url": "https://git.hijack.moe/crackhopper/ligle-engine.git"
+    "url": "https://github.com/a-oak/ligle-engine.git"
   },
   "keywords": [
     "ligle",
