@@ -1,0 +1,12 @@
+{
+  "extends": "defaults/configurations/eslint.js",
+  "env": {
+    "es6": true,
+    "node": true,
+    "mocha":true
+  },
+  "rules": {
+    "comma-dangle":[2, "always-multiline"],
+    "max-statements":[2,20]
+  }
+}

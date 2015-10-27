@@ -19,13 +19,15 @@
   "license": "MIT",
   "dependencies": {
     "async": "^1.2.1",
-    "ligle-util": "~0.4.0",
     "ligle-db": "~0.4.0",
+    "ligle-midware": "~0.4.0",
     "ligle-model": "~0.4.0",
-    "ligle-midware": "~0.4.0"
+    "ligle-odm": "^0.1.0",
+    "ligle-util": "~0.4.0"
   },
   "devDependencies": {
     "chai": "^3.0.0",
+    "eslint-config-defaults": "^7.0.1",
     "grunt": "^0.4.5",
     "grunt-bump": "^0.6.0",
     "grunt-changelog": "^0.3.1",
